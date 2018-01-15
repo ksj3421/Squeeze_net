@@ -13,8 +13,7 @@ import tensorflow as tf
 tf.set_random_seed(777)  # reproducibility
 
 ILSVRC2012 = input_data.read_data_sets("ILSVRC2012_data/", one_hot=True)
-# Check out https://www.tensorflow.org/get_started/ILSVRC2012/beginners for
-# more information about the ILSVRC2012 dataset
+#URL of ILSVRC2012 dataset -->  http://www.image-net.org/challenges/LSVRC/2012/nonpub-downloads 
 
 # hyper parameters
 learning_rate = 0.04
@@ -32,21 +31,20 @@ class Model:
     
     def _build_net(self):
         with tf.variable_scope(self.name):
-            # dropout (keep_prob) rate  0.7~0.5 on training, but should be 1
-            # for testing
+           
             self.training = tf.placeholder(tf.bool)
 
             # input place holders
             self.X = tf.placeholder(tf.float32, [None, 51529])
 
-            # img 28x28x1 (black/white), Input Layer
+            # img 227x227x1 (black/white), Input Layer
             X_img = tf.reshape(self.X, [-1, 227, 227, 1])
             self.Y = tf.placeholder(tf.float32, [None, 1000])
 
             # Convolutional Layer #1
             conv1 = tf.layers.conv2d(inputs=X_img, filters=96, kernel_size=[7, 7],
                                      padding="SAME", activation=tf.nn.relu)
-            #n*227*227*96
+           
             # Pooling Layer #1
             pool1 = tf.layers.max_pooling2d(inputs=conv1, pool_size=[3, 3],strides=2)
             
