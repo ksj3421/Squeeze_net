@@ -4,25 +4,12 @@ Created on Mon Jan 15 23:55:10 2018
 
 @author: KangSuejung
 """
-
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jan 15 22:48:28 2018
-
-@author: KangSuejung
-"""
- 
-# Lab 11 ilsvrc2012 and Deep learning CNN
 import tensorflow as tf
-# import matplotlib.pyplot as plt
 
 
 tf.set_random_seed(777)  # reproducibility
  
 ilsvrc2012 = input_data.read_data_sets("ilsvrc2012/", one_hot=True)
-# Check out https://www.tensorflow.org/get_started/ilsvrc2012/beginners for
-# more information about the ilsvrc2012 dataset
-
 # hyper parameters
 learning_rate = 0.04
 training_epochs = 1000
