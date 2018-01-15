@@ -105,7 +105,7 @@ class Model:
             conv9 = tf.concat([conv9_e1x1, conv9_e3x3], 1)
             dropout = tf.layers.dropout(inputs=conv9,rate=0.5, training=self.training)
            # Convolutional Layer #10
-            avgpool10 = tf.contrib.layers.avg_pool2d(dropout, kernel_size =[4,4])
+            avgpool10 = tf.contrib.layers.avg_pool2d(dropout, kernel_size =[13,13])
             net = tf.layers.conv2d(inputs=avgpool10, filters=1000, kernel_size=[1,1],activation=None)
             self.logits = tf.layers.dense(inputs=net, units=1000)
             # define cost/loss & optimizer
