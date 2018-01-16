@@ -3,10 +3,10 @@ Tensorflow implementation of SqueezeNet
 Original paper: [SqueezeNet: AlexNet-level accuracy with 50x fewer parameters and <0.5MB model size]
 (https://arxiv.org/abs/1602.07360)
 Purpose: First trial of implement deep-learning algorithm 
-To do: By pass algorithm, training with real data(GPU Resource is not yet prepared)
+To do: training with real data(GPU Resource is not yet prepared)
 
 [Hyperparameter]
-initial learning rate = 0.04(linearly decreasing- AdagradOptimizer)
+initial learning rate = 0.04(Considered learning rate decreasing- AdagradOptimizer)
 batch size initial= 512
 
 [Layer]
