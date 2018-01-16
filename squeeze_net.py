@@ -36,7 +36,7 @@ class Model:
             self.training = tf.placeholder(tf.bool)
 
             # input place holders
-            self.X = tf.placeholder(tf.float32, [None, 50176])
+            self.X = tf.placeholder(tf.float32, (None, 224, 224, 3))
 
             # img 28x28x1 (black/white), Input Layer
             X_img = tf.reshape(self.X, [-1, 224, 224, 3])
