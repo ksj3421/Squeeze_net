@@ -47,7 +47,7 @@ class Model:
             conv1 = tf.layers.conv2d(inputs=X_img, filters=96, kernel_size=[7, 7],strides=(2,2),
                                      padding="VALID", activation=tf.nn.relu)
             print(np.shape(conv1))
-            #n*227*227*96
+            
             # Pooling Layer #1
             pool1 = tf.layers.max_pooling2d(inputs=conv1, pool_size=[3, 3],strides=2,padding="VALID")
             print(np.shape(pool1))
@@ -74,48 +74,48 @@ class Model:
             
             # Pooling Layer #2
             pool2 = tf.layers.max_pooling2d(inputs=conv4, pool_size=[3, 3],strides=2,padding="VALID")
-            print("pooling2 %d",np.shape(pool2))
+            print("pooling2 :",np.shape(pool2))
             #fire_module #5
             conv5_1 = tf.layers.conv2d(inputs=pool2, filters=32, kernel_size=[1, 1], activation=tf.nn.relu)
             conv5_e1x1 = tf.layers.conv2d(inputs=conv5_1, filters=128, kernel_size=[1, 1], activation=tf.nn.relu,padding="SAME")
             conv5_e3x3 = tf.layers.conv2d(inputs=conv5_1, filters=128, kernel_size=[3, 3], activation=tf.nn.relu,padding="SAME")
             conv5 = tf.concat([conv5_e1x1, conv5_e3x3], 3)
-            print("fire 5 %d",np.shape(conv5))
+            print("fire 5 :",np.shape(conv5))
             #fire_module #6
             conv6_1 = tf.layers.conv2d(inputs=conv5, filters=48, kernel_size=[1, 1], activation=tf.nn.relu)
             conv6_e1x1 = tf.layers.conv2d(inputs=conv6_1, filters=192, kernel_size=[1, 1], activation=tf.nn.relu,padding="SAME")
             conv6_e3x3 = tf.layers.conv2d(inputs=conv6_1, filters=192, kernel_size=[3, 3], activation=tf.nn.relu,padding="SAME")
             conv6 = tf.concat([conv6_e1x1, conv6_e3x3], 3)
-            print("fire 6 %d",np.shape(conv6))
+            print("fire 6 :",np.shape(conv6))
             #fire_module #7
             conv7_1 = tf.layers.conv2d(inputs=conv6, filters=48, kernel_size=[1, 1],activation=tf.nn.relu)
             conv7_e1x1 = tf.layers.conv2d(inputs=conv7_1, filters=192, kernel_size=[1, 1], activation=tf.nn.relu,padding="SAME")
             conv7_e3x3 = tf.layers.conv2d(inputs=conv7_1, filters=192, kernel_size=[3, 3], activation=tf.nn.relu,padding="SAME")
             conv7 = tf.concat([conv7_e1x1, conv7_e3x3], 3)
-            print("fire 7 %d",np.shape(conv7))
+            print("fire 7 :",np.shape(conv7))
             #fire_module #8
             conv8_1 = tf.layers.conv2d(inputs=conv7, filters=64, kernel_size=[1, 1], activation=tf.nn.relu)
             conv8_e1x1 = tf.layers.conv2d(inputs=conv8_1, filters=256, kernel_size=[1, 1], activation=tf.nn.relu,padding="SAME")
             conv8_e3x3 = tf.layers.conv2d(inputs=conv8_1, filters=256, kernel_size=[3, 3], activation=tf.nn.relu,padding="SAME")
             conv8 = tf.concat([conv8_e1x1, conv8_e3x3], 3)
-            print("fire 8 %d",np.shape(conv8))
+            print("fire 8 :",np.shape(conv8))
             # Pooling Layer #2
             pool3 = tf.layers.max_pooling2d(inputs=conv8, pool_size=[3, 3],strides=2,padding="VALID")
-            print("pooling3 %d",np.shape(pool3))
+            print("pooling3 :",np.shape(pool3))
             #fire_module #9
             conv9_1 = tf.layers.conv2d(inputs=pool3, filters=64, kernel_size=[1, 1],activation=tf.nn.relu)
             conv9_e1x1 = tf.layers.conv2d(inputs=conv9_1, filters=256, kernel_size=[1, 1], activation=tf.nn.relu,padding="SAME")
             conv9_e3x3 = tf.layers.conv2d(inputs=conv9_1, filters=256, kernel_size=[3, 3], activation=tf.nn.relu,padding="SAME")
             conv9 = tf.concat([conv9_e1x1, conv9_e3x3], 3)
-            print("fire9 %d",np.shape(conv9))
+            print("fire9 :",np.shape(conv9))
             dropout = tf.layers.dropout(inputs=conv9,rate=0.5, training=self.training)
            # Convolutional Layer #10
             net = tf.layers.conv2d(inputs=dropout, filters=1000, kernel_size=[1,1],activation=None)
-            print("conv10 %d",np.shape(net))
+            print("conv10 :",np.shape(net))
             h = tf.nn.avg_pool(net, ksize=[1, 13, 13, 1000], strides=[1, 1, 1, 1], padding='VALID')
             avgpool10 = tf.reduce_mean(h, axis=[1, 2])
             #avgpool10 = tf.contrib.layers.avg_pool2d(net, kernel_size =[13,13],stride=1,padding='VALID')
-            print("avgpool%d",np.shape(avgpool10))
+            print("avgpool:",np.shape(avgpool10))
             
 
 
@@ -140,6 +140,7 @@ class Model:
     def train(self, x_data, y_data, training=True):
         return self.sess.run([self.cost, self.optimizer], feed_dict={
             self.X: x_data, self.Y: y_data, self.training: training})
+
 
 
 # initialize
